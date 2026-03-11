@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'LaraCommerce API',
   description: 'Full-featured Laravel 12 Ecommerce REST API — Documentation',
-  base: '/',
+  base: '/api-ecomerce-docs/',
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
