@@ -6,7 +6,7 @@ export default defineConfig({
   base: '/api-ecomerce-docs/',
 
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/api-ecomerce-docs/favicon.svg' }],
     ['meta', { name: 'theme-color', content: '#3b82f6' }],
   ],
 
