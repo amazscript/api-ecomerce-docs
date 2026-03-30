@@ -10,7 +10,7 @@ All payment endpoints require authentication.
 
 ```
 1. Place order   → POST /orders          → order_number
-2. Create intent → POST /payments/intent → client_secret
+2. Create intent → POST /payments/intent → stripe_client_secret
 3. Confirm       → Stripe.js / SDK       → payment confirmed on client
 4. Verify        → POST /payments/confirm → server verifies status
 5. Webhook       → Stripe notifies API  → order marked paid
@@ -24,7 +24,7 @@ All payment endpoints require authentication.
 POST /api/v1/payments/intent
 ```
 
-Creates a Stripe PaymentIntent for a pending order. Returns the `client_secret` needed by the frontend to complete payment.
+Creates a Stripe PaymentIntent for a pending order. Returns the `stripe_client_secret` needed by the frontend to complete payment.
 
 **Request:**
 ```json
@@ -50,14 +50,14 @@ Creates a Stripe PaymentIntent for a pending order. Returns the `client_secret` 
     "currency": "EUR",
     "status": "pending",
     "stripe_payment_intent_id": "pi_3Oxxxxxx",
-    "client_secret": "pi_3Oxxxxxx_secret_xxxxxxx",
+    "stripe_client_secret": "pi_3Oxxxxxx_secret_xxxxxxx",
     "requires_action": false
   }
 }
 ```
 
 ::: tip 3D Secure
-If `requires_action: true`, the customer must complete 3DS verification in the browser/app. Use the `client_secret` with `stripe.handleNextAction()` or `stripe.confirmCardPayment()`.
+If `requires_action: true`, the customer must complete 3DS verification in the browser/app. Use the `stripe_client_secret` with `stripe.handleNextAction()` or `stripe.confirmCardPayment()`.
 :::
 
 ---
@@ -184,7 +184,7 @@ Removes the card locally and detaches it from Stripe. If it was the default card
 ## Stripe Webhooks
 
 ```http
-POST /api/v1/stripe/webhook
+POST /api/v1/webhooks/stripe
 ```
 
 Stripe sends events to this endpoint automatically. Supported events:

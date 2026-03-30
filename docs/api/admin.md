@@ -1,6 +1,6 @@
 # Admin API Reference
 
-Admin endpoints are prefixed with `/api/v1/admin/` and require authentication with `admin` or `manager` role.
+Admin endpoints are prefixed with `/api/v1/admin/` and require authentication with `admin` role.
 
 ---
 
@@ -82,6 +82,7 @@ DELETE              /api/v1/admin/customer-groups/{id}/users/{user_id} (Detach)
 ```http
 GET/POST/PUT/DELETE /api/v1/admin/coupons/{id}
 GET/POST/PUT/DELETE /api/v1/admin/promotions/{id}
+POST                /api/v1/admin/promotions/{id}/sync-products
 ```
 
 ### Flash Sales & Bundles
@@ -133,6 +134,21 @@ GET/POST/PUT/DELETE /api/v1/admin/blog-posts/{id}
 POST                /api/v1/admin/blog-posts/{id}/publish
 POST                /api/v1/admin/blog-posts/{id}/unpublish
 GET/POST/PUT/DELETE /api/v1/admin/pages/{id}
+```
+
+### FAQs & Contacts
+```http
+GET/POST/PUT/DELETE /api/v1/admin/faqs/{id}
+POST                /api/v1/admin/faqs/reorder
+GET                 /api/v1/admin/contacts
+GET                 /api/v1/admin/contacts/{contact}
+DELETE              /api/v1/admin/contacts/{contact}
+PATCH               /api/v1/admin/contacts/{contact}/read
+```
+
+### Currencies
+```http
+POST                /api/v1/admin/currencies/sync-rates
 ```
 
 ### Webhooks

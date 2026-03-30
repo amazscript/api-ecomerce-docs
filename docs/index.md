@@ -4,7 +4,7 @@ layout: home
 hero:
   name: "LaraCommerce API"
   text: "The Complete Ecommerce Backend You Need"
-  tagline: "Ship your mobile or web store in days, not months. Laravel 12 + Stripe + Filament v3 + Meilisearch + 2443 Tests + 100% Coverage."
+  tagline: "Ship your mobile or web store in days, not months. Laravel 12 + Stripe + Filament v3 + Meilisearch + 2452 Tests + 100% Coverage."
   image:
     src: /hero-image.svg
     alt: LaraCommerce
@@ -43,15 +43,15 @@ features:
 
   - icon: 🌍
     title: Multi-Language & Multi-Currency
-    details: 5 languages (EN, FR, AR with RTL, ES, DE) and 7 currencies (USD, EUR, GBP, MAD, CAD, CHF, AED) built in.
+    details: 3 languages (EN, FR, AR with RTL) and 7 currencies (USD, EUR, GBP, MAD, CAD, CHF, AED) built in.
 
   - icon: ✅
-    title: 2443 Tests / 100% Code Coverage
+    title: 2452 Tests / 100% Code Coverage
     details: Every controller, service, model, middleware, and policy tested. SQLite in-memory for fast, isolated testing. Ship with confidence.
 
   - icon: 🐳
     title: One-Command Docker Setup
-    details: "11 pre-configured services: Laravel, MySQL, Redis, Meilisearch, MinIO, Mailpit, Horizon, Nginx with SSL, Adminer, Redis Commander."
+    details: "12 pre-configured services: Laravel, MySQL, Redis, Meilisearch, MinIO, Mailpit, Horizon, Nginx with SSL, Adminer, Redis Commander."
 ---
 
 <style>

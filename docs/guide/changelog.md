@@ -1,5 +1,27 @@
 # Changelog
 
+## v1.0.3 — 2026-03-17
+
+### Push Notifications — FCM v1 API
+- Installed `kreait/laravel-firebase` package for Firebase Cloud Messaging v1 API (replaces deprecated legacy API).
+- Created `FcmChannel` — custom Laravel notification channel for push notifications.
+- Rewrote `PushNotificationService` to use `Kreait\Firebase\Contract\Messaging::sendMulticast()` with automatic invalid token deactivation.
+- Added push channel to **11 notifications**: OrderPlaced, OrderConfirmed, OrderShipped, OrderDelivered, OrderCancelled, PaymentFailed, RefundProcessed, ReturnApproved, ReturnRejected, StockBackInStock, Welcome.
+- Each notification now includes a `toFcm()` method returning `title`, `body`, and `data` (with `type` for Flutter navigation).
+- Updated `NotificationController` response format to expose `type`, `title`, `body`, `data` fields for Flutter consumption.
+- Fixed `SendPushNotificationJob` to accept `User` model instead of raw token string.
+
+### Admin Panel — Notifications Section
+- New **PushNotificationResource** (`/admin/push-notifications`): list all notifications, filter by type/read status, mark read/unread, send manual push to any user.
+- New **PushTokenResource** (`/admin/push-tokens`): list device tokens, test push, activate/deactivate tokens, filter by platform.
+- Added "Notifications" navigation group in Filament sidebar.
+
+### Configuration
+- `FIREBASE_CREDENTIALS` environment variable added (points to service account JSON file).
+- Firebase service account JSON excluded from git via `.gitignore`.
+
+---
+
 ## v1.0.2 — 2026-03-13
 
 ### Code Coverage
@@ -65,7 +87,7 @@ Initial release.
 - Multi-language support — EN, FR, AR (RTL), ES, DE
 - Multi-currency — USD, EUR, GBP, MAD, CAD, CHF, AED
 - Frontend demo — Bootstrap 5 + jQuery + Stripe.js (single HTML file)
-- 2443 automated tests / 4783 assertions / 100% code coverage
+- 2452 automated tests / 4808 assertions / 100% code coverage
 - MinIO / AWS S3 storage for images
 - Laravel Horizon for queue monitoring
 - Rate limiting & CORS configured

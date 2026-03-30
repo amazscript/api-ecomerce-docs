@@ -9,7 +9,7 @@ The catalogue is fully public — no authentication needed to browse products, c
 ### List Categories
 
 ```http
-GET /api/v1/categories
+GET /api/v1/catalogue/categories
 ```
 
 Returns the category tree (root categories with nested children).
@@ -42,7 +42,7 @@ Returns the category tree (root categories with nested children).
 ### Get Category
 
 ```http
-GET /api/v1/categories/{id}
+GET /api/v1/catalogue/categories/{id}
 ```
 
 Returns a single category with its direct children.
@@ -54,7 +54,7 @@ Returns a single category with its direct children.
 ### List Products
 
 ```http
-GET /api/v1/products
+GET /api/v1/catalogue/products
 ```
 
 Returns a paginated list of published, active products.
@@ -86,24 +86,26 @@ Returns a paginated list of published, active products.
       "slug": "iphone-15-pro",
       "price": "999.00",
       "compare_price": "1099.00",
+      "sku": "IPH15P",
+      "discount_percentage": 9,
       "average_rating": 4.7,
       "reviews_count": 42,
-      "has_stock": true,
+      "is_featured": true,
+      "is_in_stock": true,
+      "stock_status": "in_stock",
       "is_digital": false,
       "brand": { "id": 1, "name": "Apple" },
       "category": { "id": 5, "name": "Smartphones" },
-      "images": [
-        { "url": "https://...", "is_primary": true }
-      ],
+      "primary_image": "https://cdn.example.com/products/iphone-15-pro.jpg",
       "variants": [
         {
           "id": 10,
           "sku": "IPH15P-256-BLK",
           "price": "999.00",
-          "stock_quantity": 50,
-          "attribute_values": [
-            { "attribute": "Storage", "value": "256GB" },
-            { "attribute": "Color", "value": "Black" }
+          "is_in_stock": true,
+          "attributes": [
+            { "attribute_id": 1, "attribute_name": "Storage", "attribute_type": "text", "value_id": 5, "value": "256GB", "color_code": null },
+            { "attribute_id": 2, "attribute_name": "Color", "attribute_type": "color", "value_id": 12, "value": "Black", "color_code": "#000000" }
           ]
         }
       ]
@@ -121,7 +123,7 @@ Returns a paginated list of published, active products.
 ### Get Product Detail
 
 ```http
-GET /api/v1/products/{slug}
+GET /api/v1/catalogue/products/{slug}
 ```
 
 Returns full product information including all variants, attributes, tags, and images. Each call increments the `views_count` counter.
@@ -134,16 +136,28 @@ Returns full product information including all variants, attributes, tags, and i
     "id": 1,
     "name": "iPhone 15 Pro",
     "slug": "iphone-15-pro",
+    "short_description": "The most advanced iPhone ever.",
     "description": "...",
     "price": "999.00",
     "compare_price": "1099.00",
     "sku": "IPH15P",
+    "discount_percentage": 9,
     "weight": 0.187,
+    "length": 15.0,
+    "width": 7.5,
+    "height": 0.8,
     "average_rating": 4.7,
     "reviews_count": 42,
     "views_count": 1503,
+    "sales_count": 340,
+    "is_featured": true,
     "is_digital": false,
+    "is_in_stock": true,
+    "status": "active",
+    "stock_status": "in_stock",
     "published_at": "2026-01-15T00:00:00Z",
+    "meta_title": "iPhone 15 Pro - Buy Online",
+    "meta_description": "Shop the iPhone 15 Pro with free shipping.",
     "brand": { "id": 1, "name": "Apple", "logo_url": "https://..." },
     "category": { "id": 5, "name": "Smartphones", "slug": "smartphones" },
     "tags": ["5G", "Pro", "Titanium"],
@@ -160,11 +174,12 @@ Returns full product information including all variants, attributes, tags, and i
         "weight": 0.187,
         "is_active": true,
         "attribute_values": [
-          { "attribute": "Storage", "value": "256GB", "color_hex": null },
-          { "attribute": "Color", "value": "Black", "color_hex": "#000000" }
+          { "id": 5, "value": "256GB", "color_code": null, "sort_order": 1 },
+          { "id": 12, "value": "Black", "color_code": "#000000", "sort_order": 2 }
         ]
       }
-    ]
+    ],
+    "created_at": "2026-01-15T00:00:00Z"
   }
 }
 ```
@@ -172,7 +187,7 @@ Returns full product information including all variants, attributes, tags, and i
 ### Featured Products
 
 ```http
-GET /api/v1/products/featured
+GET /api/v1/catalogue/products/featured
 ```
 
 Returns up to 12 featured products. Ideal for homepage carousels.
@@ -180,7 +195,7 @@ Returns up to 12 featured products. Ideal for homepage carousels.
 ### Related Products
 
 ```http
-GET /api/v1/products/{slug}/related
+GET /api/v1/catalogue/products/{slug}/related
 ```
 
 Returns up to 8 products from the same category or brand, in random order. Perfect for "You may also like" sections.
@@ -188,7 +203,7 @@ Returns up to 8 products from the same category or brand, in random order. Perfe
 ### Frequently Bought Together
 
 ```http
-GET /api/v1/products/{slug}/frequently-bought-together
+GET /api/v1/catalogue/products/{slug}/frequently-bought-together
 ```
 
 Returns up to 6 products that are most often ordered together with this product, ranked by purchase frequency.
@@ -238,7 +253,7 @@ Use the `attribute_value_id[]` filter on the product list to show only products 
 ### List Product Reviews
 
 ```http
-GET /api/v1/products/{slug}/reviews
+GET /api/v1/catalogue/products/{slug}/reviews
 ```
 
 Public endpoint. Returns approved reviews, sorted by helpfulness then recency.
@@ -275,7 +290,7 @@ Public endpoint. Returns approved reviews, sorted by helpfulness then recency.
 ### Submit a Review
 
 ```http
-POST /api/v1/products/{slug}/reviews
+POST /api/v1/catalogue/products/{slug}/reviews
 ```
 
 *Requires authentication.*

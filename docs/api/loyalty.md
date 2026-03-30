@@ -65,13 +65,7 @@ All affiliate endpoints require authentication.
 POST /api/v1/user/affiliate/register
 ```
 
-**Request:**
-```json
-{
-  "website": "https://myblog.com",
-  "description": "Tech review blog with 50k monthly readers"
-}
-```
+No request body required. The current authenticated user is registered as an affiliate.
 
 **Response `201`:**
 ```json
@@ -80,9 +74,14 @@ POST /api/v1/user/affiliate/register
   "data": {
     "id": 1,
     "code": "JOHN-2026",
-    "referral_url": "https://yourstore.com?ref=JOHN-2026",
-    "commission_rate": "10.00",
-    "status": "pending"
+    "commission_type": "percentage",
+    "commission_rate": 0.05,
+    "status": "pending",
+    "balance": "0.00",
+    "total_earned": "0.00",
+    "total_orders": 0,
+    "approved_at": null,
+    "created_at": "2026-03-10T10:00:00+00:00"
   }
 }
 ```
@@ -101,13 +100,14 @@ GET /api/v1/user/affiliate
   "status": "success",
   "data": {
     "code": "JOHN-2026",
-    "referral_url": "https://yourstore.com?ref=JOHN-2026",
-    "commission_rate": "10.00",
+    "commission_type": "percentage",
+    "commission_rate": 0.05,
     "status": "active",
-    "total_conversions": 24,
+    "balance": "87.20",
     "total_earned": "348.50",
-    "pending_payout": "87.20",
-    "paid_out": "261.30"
+    "total_orders": 24,
+    "approved_at": "2026-03-02T10:00:00+00:00",
+    "created_at": "2026-03-01T09:00:00+00:00"
   }
 }
 ```
@@ -127,11 +127,13 @@ Paginated list of all affiliate conversions (referral clicks that resulted in a 
   "data": [
     {
       "id": 1,
-      "order_number": "ORD-20260301-0042",
-      "order_total": "89.99",
-      "commission_amount": "9.00",
+      "order_id": 42,
+      "referred_user_id": 15,
+      "commission_amount": 9.00,
       "status": "approved",
-      "converted_at": "2026-03-01T14:22:00Z"
+      "approved_at": "2026-03-02T10:00:00+00:00",
+      "paid_at": null,
+      "created_at": "2026-03-01T14:22:00+00:00"
     }
   ]
 }

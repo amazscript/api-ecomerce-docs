@@ -40,7 +40,7 @@ SESSION_DRIVER=redis
 QUEUE_CONNECTION=redis
 
 REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
+REDIS_PASSWORD=secret
 REDIS_PORT=6379
 ```
 
@@ -56,7 +56,7 @@ MAIL_USERNAME=your@email.com
 MAIL_PASSWORD=yourpassword
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS="noreply@yourstore.com"
-MAIL_FROM_NAME="LaraCommerce"
+MAIL_FROM_NAME="EcommerceAPI"
 ```
 
 ---
@@ -67,8 +67,8 @@ MAIL_FROM_NAME="LaraCommerce"
 AWS_ACCESS_KEY_ID=minioadmin
 AWS_SECRET_ACCESS_KEY=minioadmin
 AWS_DEFAULT_REGION=us-east-1
-AWS_BUCKET=laracommerce
-AWS_ENDPOINT=http://localhost:9000
+AWS_BUCKET=ecommerce
+AWS_ENDPOINT=http://minio:9000
 AWS_USE_PATH_STYLE_ENDPOINT=true
 ```
 
@@ -98,15 +98,21 @@ MEILISEARCH_KEY=your-master-key
 
 ---
 
-### Push Notifications (Firebase FCM)
+### Push Notifications (Firebase FCM v1)
 
 ```ini
-FIREBASE_SERVER_KEY=your-firebase-server-key
+FIREBASE_CREDENTIALS=firebase-service-account.json
 ```
 
-Get this from your [Firebase Console](https://console.firebase.google.com/) → Project Settings → Cloud Messaging → Server key.
+LaraCommerce uses the **FCM v1 API** (via `kreait/laravel-firebase`) instead of the deprecated legacy API.
 
-Push notifications are sent to mobile devices (iOS/Android) and web browsers via Firebase Cloud Messaging. Users register their device tokens via `POST /api/v1/user/push-token`.
+**Setup:**
+1. Go to [Firebase Console](https://console.firebase.google.com/) → Project Settings → Service accounts
+2. Click **"Generate new private key"** to download the JSON file
+3. Place the file at the project root (e.g., `firebase-service-account.json`)
+4. Set `FIREBASE_CREDENTIALS` in `.env` to the filename
+
+The file is excluded from git via `.gitignore`. Push notifications are sent to mobile devices (iOS/Android) via Firebase Cloud Messaging. Users register their device tokens via `POST /api/v1/user/push-token`.
 
 ---
 
@@ -133,7 +139,7 @@ APP_LOCALE=en
 APP_FALLBACK_LOCALE=en
 ```
 
-Supported languages: `en`, `fr`, `ar`, `es`, `de`
+Supported languages: `en`, `fr`, `ar`
 Supported currencies: `USD`, `EUR`, `GBP`, `MAD`, `CAD`, `CHF`, `AED`
 
 Configure additional languages and exchange rates in the admin panel under **Settings → Languages** and **Settings → Currencies**.

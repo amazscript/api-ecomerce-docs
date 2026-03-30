@@ -78,6 +78,19 @@ php artisan serve
 | `http://localhost:8000/admin` | Filament admin panel |
 | `http://localhost:8000/api/v1` | API v1 prefix |
 
+::: tip Makefile shortcuts
+A `Makefile` is included with common shortcuts. Instead of running all steps manually:
+```bash
+make install    # Copies .env, starts containers, generates key, migrates & seeds
+make up         # Start containers
+make down       # Stop containers
+make fresh      # Fresh migration + seed
+make test       # Run tests
+make urls       # Show all service URLs
+```
+Run `make help` for the full list of available commands.
+:::
+
 ## Default Credentials
 
 | Role | Email | Password |

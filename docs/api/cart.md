@@ -18,10 +18,11 @@ Returns the current user's cart. Creates an empty cart automatically if none exi
   "status": "success",
   "data": {
     "id": 1,
-    "currency": "USD",
     "items_count": 3,
     "subtotal": "149.97",
     "discount_amount": "15.00",
+    "total": "134.97",
+    "currency": "USD",
     "coupon": {
       "code": "SAVE10",
       "type": "percentage",
@@ -36,15 +37,17 @@ Returns the current user's cart. Creates an empty cart automatically if none exi
         "product": {
           "id": 1,
           "name": "Wireless Headphones",
-          "slug": "wireless-headphones"
+          "slug": "wireless-headphones",
+          "image": "https://example.com/storage/products/headphones.jpg"
         },
         "variant": {
           "id": 5,
-          "sku": "WH-BLK",
-          "attribute_values": [{ "attribute": "Color", "value": "Black" }]
+          "sku": "WH-BLK"
         }
       }
-    ]
+    ],
+    "expires_at": "2026-04-29T12:00:00+00:00",
+    "updated_at": "2026-03-30T10:15:30+00:00"
   }
 }
 ```
@@ -81,7 +84,7 @@ Returns the full updated cart.
 ## Update Item Quantity
 
 ```http
-PUT /api/v1/cart/items/{item_id}
+PUT /api/v1/cart/items/{item}
 ```
 
 Updates the quantity of a cart item.
@@ -98,7 +101,7 @@ Returns the full updated cart.
 ## Remove Item
 
 ```http
-DELETE /api/v1/cart/items/{item_id}
+DELETE /api/v1/cart/items/{item}
 ```
 
 Removes a single item from the cart.

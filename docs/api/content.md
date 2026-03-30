@@ -18,8 +18,8 @@ Returns published blog posts, newest first.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `category` | string | Filter by category slug |
-| `tag` | string | Filter by tag |
+| `category_id` | integer | Filter by category ID |
+| `search` | string | Search in title and content |
 | `per_page` | integer | Default: 10 |
 
 **Response `200`:**
@@ -35,8 +35,7 @@ Returns published blog posts, newest first.
       "featured_image": "https://...",
       "published_at": "2026-03-01T09:00:00Z",
       "author": { "name": "Jane Smith" },
-      "category": { "name": "Reviews", "slug": "reviews" },
-      "tags": ["audio", "headphones", "wireless"]
+      "category": { "name": "Reviews", "slug": "reviews" }
     }
   ]
 }
@@ -61,7 +60,6 @@ Returns the full blog post content.
     "content": "<p>Full HTML content...</p>",
     "meta_title": "Best Wireless Headphones 2026",
     "meta_description": "...",
-    "reading_time": 8,
     "views_count": 1240,
     ...
   }
@@ -148,13 +146,10 @@ POST /api/v1/newsletter/subscribe
 ```
 
 ```http
-POST /api/v1/newsletter/unsubscribe
+POST /api/v1/newsletter/unsubscribe/{token}
 ```
 
-**Request:**
-```json
-{ "email": "john@example.com" }
-```
+The unsubscribe link (with token) is included in every newsletter email. No request body needed.
 
 ---
 

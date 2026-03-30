@@ -11,15 +11,15 @@ Building an ecommerce backend from scratch takes **months**. LaraCommerce gives 
 | Category | Details |
 |----------|---------|
 | **API Endpoints** | 325+ routes across 25+ modules |
-| **Database** | 83 Eloquent models with 72 migrations |
+| **Database** | 88 Eloquent models with 72 migrations |
 | **Admin Panel** | Filament v3 with 46 fully-configured resources |
-| **Tests** | 2,443 tests / 4,783 assertions / 100% coverage (PHPUnit) |
+| **Tests** | 2,452 tests / 4,808 assertions / 100% coverage (PHPUnit) |
 | **Payments** | Full Stripe integration (PaymentIntents, 3DS, webhooks) |
 | **Storage** | MinIO / AWS S3 for images and files |
 | **Search** | Meilisearch with facets, filters, autocomplete |
 | **Seeders** | 50 seeders generating realistic demo data |
 | **REST Client** | 46 `.http` files for testing every endpoint |
-| **Docker** | 11 pre-configured services, one-command setup |
+| **Docker** | 12 pre-configured services, one-command setup |
 | **Documentation** | This full VitePress docs site included |
 
 ## Tech Stack
@@ -52,7 +52,7 @@ Building an ecommerce backend from scratch takes **months**. LaraCommerce gives 
 - Products with unlimited variants (size, color, custom attributes)
 - Categories (nested hierarchy), brands, tags, collections
 - Product images via MinIO/S3
-- Product translations (5 languages)
+- Product translations (3 languages)
 - Flash sales with countdown, bundles with discount, price tiers
 - Product views tracking, related products algorithm
 
@@ -110,7 +110,7 @@ Building an ecommerce backend from scratch takes **months**. LaraCommerce gives 
 - Autocomplete suggestions
 
 ### Notifications
-- Email notifications for all key events (15 notification classes)
+- Email notifications for all key events (19 notification classes)
 - In-app database notifications
 - Push notification support (Firebase FCM)
 - Custom webhook endpoints with delivery logs
@@ -164,14 +164,14 @@ Content-Type: application/json
 
 ```
 app/
-├── Models/          # 83 Eloquent models
+├── Models/          # 88 Eloquent models
 ├── Http/Controllers/Api/V1/  # API controllers
 ├── Services/        # Business logic (Auth, Commerce, Marketing)
 ├── Filament/        # 46 admin resources
-├── Policies/        # 20 authorization policies
-├── Observers/       # 10 event observers
-├── Notifications/   # 15 notification classes
-├── Jobs/            # 10 queued jobs
+├── Policies/        # 18 authorization policies
+├── Observers/       # 8 event observers
+├── Notifications/   # 19 notification classes
+├── Jobs/            # 8 queued jobs
 ├── Enums/           # 17 type-safe enums
 └── Traits/          # Reusable functionality
 
@@ -183,6 +183,6 @@ tests/
 ├── Feature/         # API endpoint tests
 └── Unit/            # Service unit tests
 
-rest/                # 48 .http files for API testing
+rest/                # 46 .http files for API testing
 docs-site/           # This documentation (VitePress)
 ```

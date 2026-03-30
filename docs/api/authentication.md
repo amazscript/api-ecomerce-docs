@@ -253,7 +253,7 @@ POST /api/v1/auth/social/{provider}
 
 OAuth login using an external provider. Returns the same token pair as regular login.
 
-**Supported providers:** `google`, `facebook` (configurable in `config/services.php`)
+**Supported providers:** `google`, `facebook`, `apple` (configurable in `config/services.php`)
 
 **Request:**
 ```json

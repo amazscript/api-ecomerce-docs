@@ -305,12 +305,6 @@ GET /api/v1/user/invoices
 
 Lists all invoices for the user's orders.
 
-```http
-GET /api/v1/user/invoices/{id}/download
-```
-
-Downloads the invoice as a PDF.
-
 ---
 
 ## Notifications
@@ -323,12 +317,6 @@ GET /api/v1/user/notifications
 
 Returns unread and recent notifications.
 
-### Mark as Read
-
-```http
-PATCH /api/v1/user/notifications/{id}/read
-```
-
 ### Mark All as Read
 
 ```http
@@ -338,7 +326,7 @@ PATCH /api/v1/user/notifications/read-all
 ### Register Push Token
 
 ```http
-POST /api/v1/user/push-tokens
+POST /api/v1/user/push-token
 ```
 
 Register a device token for push notifications (iOS/Android).

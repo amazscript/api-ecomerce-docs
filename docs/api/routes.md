@@ -54,6 +54,7 @@ All catalogue endpoints are under `/api/v1/catalogue/`
 | `GET` | `/catalogue/products/{product:slug}/reviews` | 🔓 | Approved reviews for product |
 | `GET` | `/catalogue/search` | 🔓 | Full-text search with filters + facets |
 | `GET` | `/catalogue/search/suggestions` | 🔓 | Autocomplete suggestions |
+| `GET` | `/catalogue/search/popular` | 🔓 | Popular search terms |
 
 ---
 
@@ -306,6 +307,7 @@ All catalogue endpoints are under `/api/v1/catalogue/`
 |--------|----------|------|-------------|
 | `GET/POST` | `/admin/coupons` | 🛡️ | Coupons CRUD |
 | `GET/POST` | `/admin/promotions` | 🛡️ | Promotions CRUD |
+| `POST` | `/admin/promotions/{id}/sync-products` | 🛡️ | Sync products to promotion |
 | `GET/POST` | `/admin/flash-sales` | 🛡️ | Flash sales CRUD |
 | `POST` | `/admin/flash-sales/{id}/items` | 🛡️ | Add item to flash sale |
 | `DELETE` | `/admin/flash-sales/{id}/items/{item}` | 🛡️ | Remove item from flash sale |
@@ -367,8 +369,11 @@ All catalogue endpoints are under `/api/v1/catalogue/`
 | `GET/POST` | `/admin/blog-categories` | 🛡️ | Blog categories CRUD |
 | `GET/POST` | `/admin/pages` | 🛡️ | Static pages CRUD |
 | `GET/POST` | `/admin/faqs` | 🛡️ | FAQs CRUD |
+| `POST` | `/admin/faqs/reorder` | 🛡️ | Reorder FAQs |
 | `GET` | `/admin/contacts` | 🛡️ | List contact submissions |
-| `PATCH` | `/admin/contacts/{id}/read` | 🛡️ | Mark contact as read |
+| `GET` | `/admin/contacts/{contact}` | 🛡️ | View contact submission |
+| `DELETE` | `/admin/contacts/{contact}` | 🛡️ | Delete contact submission |
+| `PATCH` | `/admin/contacts/{contact}/read` | 🛡️ | Mark contact as read |
 | `GET/POST` | `/admin/newsletter` | 🛡️ | Newsletter subscribers |
 | `GET` | `/admin/newsletter/{id}` | 🛡️ | Get newsletter campaign |
 | `POST` | `/admin/newsletter/{id}/send` | 🛡️ | Send newsletter campaign |
@@ -384,6 +389,7 @@ All catalogue endpoints are under `/api/v1/catalogue/`
 | `GET` | `/admin/settings` | 🛡️ | Get all settings |
 | `PUT` | `/admin/settings` | 🛡️ | Update settings |
 | `GET/PUT` | `/admin/languages` | 🛡️ | Languages management |
+| `POST` | `/admin/currencies/sync-rates` | 🛡️ | Sync currency exchange rates |
 | `GET` | `/admin/logs/activity` | 🛡️ | Activity log (all admin actions) |
 | `GET` | `/admin/logs/api` | 🛡️ | API request logs |
 | `GET` | `/admin/logs/search` | 🛡️ | Search query logs |

@@ -7,15 +7,15 @@ Everything you need to build and launch a complete ecommerce backend — ready t
 | | |
 |---|---|
 | **API Endpoints** | 325+ RESTful routes |
-| **Database** | 83 Eloquent models with 72 migrations |
+| **Database** | 88 Eloquent models with 72 migrations |
 | **Admin Panel** | Filament v3 with 46 management screens |
 | **Automated Tests** | 100% code coverage — all classes tested |
 | **Payments** | Full Stripe integration (3DS, webhooks, refunds) |
 | **Search** | Meilisearch with facets, filters, autocomplete |
 | **Storage** | MinIO / AWS S3 ready |
-| **Docker** | 11 services, one-command setup |
+| **Docker** | 12 services, one-command setup |
 | **Documentation** | This full docs site + 46 REST client test files |
-| **Languages** | 5 (EN, FR, AR, ES, DE) |
+| **Languages** | 3 (EN, FR, AR) |
 | **Currencies** | 7 (USD, EUR, GBP, MAD, CAD, CHF, AED) |
 
 ---
@@ -56,7 +56,7 @@ Blog with categories and drafts, static pages (FAQ, Terms, Privacy), contact for
 Meilisearch full-text search with typo tolerance, faceted filtering, price range filters, category navigation, autocomplete suggestions, and multiple sort options.
 
 ### Notifications
-15 email notification templates, in-app notifications, push notification support (Firebase FCM), custom webhook endpoints with delivery logs.
+19 email notification templates, in-app notifications, push notification support (Firebase FCM), custom webhook endpoints with delivery logs.
 
 ---
 
@@ -83,7 +83,7 @@ Run the project locally to see the admin panel at `https://localhost/admin` with
 
 ## Developer Experience
 
-- **One-command Docker setup** — 11 pre-configured services, just run `docker compose up -d`
+- **One-command Docker setup** — 12 pre-configured services, just run `docker compose up -d`
 - **50 seeders** — Realistic demo data generated automatically
 - **46 REST client files** — Test every endpoint from VS Code or JetBrains
 - **100% code coverage** — Every controller, service, model, middleware, and policy tested

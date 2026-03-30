@@ -25,12 +25,14 @@ Returns all active flash sales with their items, prices, and remaining time.
       "is_active": true,
       "items": [
         {
-          "product": { "id": 1, "name": "Wireless Headphones", "slug": "wireless-headphones" },
-          "sale_price": "79.99",
-          "original_price": "129.99",
-          "discount_percentage": 38,
-          "stock_limit": 50,
-          "sold_count": 12
+          "id": 1,
+          "product_variant_id": 10,
+          "sale_price": 79.99,
+          "original_price": 129.99,
+          "discount_percent": 38.5,
+          "qty_limit": 50,
+          "qty_sold": 12,
+          "is_active": true
         }
       ]
     }
@@ -57,10 +59,10 @@ GET /api/v1/bundles
 Lists all active product bundles.
 
 ```http
-GET /api/v1/bundles/{slug}
+GET /api/v1/bundles/{id}
 ```
 
-Returns bundle details with all included products and savings.
+Returns bundle details with all included products.
 
 **Response `200`:**
 ```json
@@ -70,17 +72,22 @@ Returns bundle details with all included products and savings.
     "id": 1,
     "name": "Starter Pack",
     "slug": "starter-pack",
-    "bundle_price": "149.99",
-    "original_price": "199.97",
-    "savings": "49.98",
-    "discount_percentage": 25,
+    "description": "Everything you need to get started.",
+    "image": "https://...",
+    "discount_type": "percentage",
+    "discount_value": 25.0,
+    "is_active": true,
+    "starts_at": "2026-03-01T00:00:00+00:00",
+    "ends_at": "2026-04-01T00:00:00+00:00",
     "items": [
       {
-        "product": { "id": 1, "name": "Headphones" },
-        "variant": { "sku": "WH-BLK" },
-        "quantity": 1
+        "id": 1,
+        "product_variant_id": 10,
+        "quantity": 1,
+        "is_required": true
       }
-    ]
+    ],
+    "created_at": "2026-02-15T10:00:00+00:00"
   }
 }
 ```
@@ -145,9 +152,15 @@ Returns active promotional banners for homepage/section display.
       "title": "Spring Sale",
       "subtitle": "Up to 50% off",
       "image_url": "https://...",
-      "link": "/flash-sales/spring-sale",
+      "image_mobile_url": "https://...",
+      "link_type": "url",
+      "link_value": "/flash-sales/spring-sale",
+      "button_text": "Shop Now",
       "position": "hero",
-      "sort_order": 1
+      "sort_order": 1,
+      "is_active": true,
+      "starts_at": "2026-03-01T00:00:00+00:00",
+      "ends_at": "2026-03-31T23:59:59+00:00"
     }
   ]
 }

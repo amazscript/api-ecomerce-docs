@@ -9,7 +9,7 @@ Search endpoints are public — no authentication required.
 ## Full-Text Search
 
 ```http
-GET /api/v1/search
+GET /api/v1/catalogue/search
 ```
 
 Search across products with full filtering, sorting, and optional facets.
@@ -48,7 +48,7 @@ Search across products with full filtering, sorting, and optional facets.
 
 **Example Request:**
 ```
-GET /api/v1/search?q=headphones&min_price=30&max_price=200&in_stock=true&sort=rating_desc&with_facets=true
+GET /api/v1/catalogue/search?q=headphones&min_price=30&max_price=200&in_stock=true&sort=rating_desc&with_facets=true
 ```
 
 **Response `200`:**
@@ -63,10 +63,10 @@ GET /api/v1/search?q=headphones&min_price=30&max_price=200&in_stock=true&sort=ra
       "price": "149.99",
       "compare_price": "249.99",
       "average_rating": 4.8,
-      "has_stock": true,
+      "is_in_stock": true,
       "brand": { "name": "Sony" },
       "category": { "name": "Headphones" },
-      "images": [{ "url": "https://...", "is_primary": true }]
+      "primary_image": "https://cdn.example.com/products/sony-wh1000xm5.jpg"
     }
   ],
   "meta": {
@@ -127,7 +127,7 @@ Request `with_facets=true` on the first load to build your filter sidebar. On su
 ## Autocomplete Suggestions
 
 ```http
-GET /api/v1/search/suggestions?q=head
+GET /api/v1/catalogue/search/suggestions?q=head
 ```
 
 Returns fast autocomplete results for products and categories. Requires at least 2 characters.
@@ -173,3 +173,30 @@ MEILISEARCH_KEY=your-master-key
 ::: info Testing
 In the test environment, `SCOUT_DRIVER=collection` is used automatically — no Meilisearch server needed.
 :::
+
+---
+
+## Popular Searches
+
+```http
+GET /api/v1/catalogue/search/popular
+```
+
+Returns the most frequently searched terms from the last 30 days.
+
+**Query Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `limit` | integer | Number of results (default: 10, max: 50) |
+
+**Response `200`:**
+```json
+{
+  "status": "success",
+  "data": [
+    { "query": "headphones", "count": 342, "avg_results": 47.0 },
+    { "query": "wireless speaker", "count": 218, "avg_results": 23.0 }
+  ]
+}
+```

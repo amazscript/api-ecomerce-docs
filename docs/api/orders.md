@@ -52,6 +52,7 @@ Creates an order from the current cart. The cart must not be empty.
 {
   "address_id": 1,
   "shipping_method_id": 2,
+  "payment_method": "stripe",
   "notes": "Please leave at the door"
 }
 ```
@@ -60,15 +61,16 @@ Creates an order from the current cart. The cart must not be empty.
 |-------|----------|-------------|
 | `address_id` | Yes | Delivery address from your saved addresses |
 | `shipping_method_id` | Yes | Selected shipping method |
+| `payment_method` | No | `stripe` (default) or `cod` (cash on delivery) |
 | `notes` | No | Optional order notes (max 500 chars) |
 
 **What happens on checkout:**
 1. Taxes are calculated via `TaxService` using the delivery address country/state
 2. Order and items are created with price/product snapshots
-3. Stock is **deducted** from inventory for each variant with `track_inventory` enabled
-4. Coupon usage is recorded (if applicable)
-5. The cart is cleared
-6. An order number is auto-generated (`ORD-YYYYMMDD-XXXX`)
+3. Coupon usage is recorded (if applicable)
+4. An order number is auto-generated (`ORD-YYYYMMDD-XXXX`)
+5. For **COD** orders: the order is finalized immediately — stock is deducted and the cart is cleared
+6. For **Stripe** orders: stock is deducted and the cart is cleared only after payment is confirmed
 
 ::: warning Stock Protection
 If any item has insufficient stock, the entire checkout transaction is rolled back and an error is returned. No partial orders are created.
@@ -78,13 +80,13 @@ If any item has insufficient stock, the entire checkout transaction is rolled ba
 ```json
 {
   "status": "success",
-  "message": "Order placed successfully.",
+  "message": "Order created successfully.",
   "data": {
     "id": 1,
     "order_number": "ORD-20260305-0001",
     "status": "pending",
     "subtotal": "119.98",
-    "shipping_cost": "9.99",
+    "shipping_amount": "9.99",
     "discount_amount": "0.00",
     "tax_amount": "12.00",
     "total": "141.97",
@@ -141,6 +143,10 @@ POST /api/v1/orders/{order_number}/cancel
 { "reason": "Changed my mind" }
 ```
 
+| Field | Required | Description |
+|-------|----------|-------------|
+| `reason` | Yes | Cancellation reason (max 500 chars) |
+
 Cancellation is only allowed when the order is in `pending` or `confirmed` status. Orders that are `shipped` or `delivered` cannot be cancelled.
 
 **Response `200`:**
@@ -174,6 +180,7 @@ Cancellation is only allowed when the order is in `pending` or `confirmed` statu
 | `delivered` | Delivered to customer |
 | `cancelled` | Cancelled by customer or admin |
 | `refunded` | Fully refunded |
+| `returned` | Order returned by customer |
 
 Every status change is logged in `status_histories` with a timestamp and optional note.
 
